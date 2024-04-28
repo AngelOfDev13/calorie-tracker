@@ -1,5 +1,4 @@
 import { useMemo } from "react"
-import { Formulario } from "../types"
 import CalorieDisplay from "./CalorieDisplay"
 import { useActivity } from "../hooks/useActivity"
 
