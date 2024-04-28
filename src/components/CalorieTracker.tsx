@@ -1,16 +1,19 @@
 import { useMemo } from "react"
 import { Formulario } from "../types"
 import CalorieDisplay from "./CalorieDisplay"
+import { useActivity } from "../hooks/useActivity"
 
-type CalorieProps = {
-    activities: Formulario[]
-}
+// type CalorieProps = {
+//     activities: Formulario[]
+// }
 
-const CalorieTracker = ({ activities } : CalorieProps) => {
+const CalorieTracker = () => {
 
-    const caloriesConsumed = useMemo(() => activities.reduce((total, activity) => activity.category === 1 ? total + activity.calories : total, 0 ), [activities])
-    const caloriesBurned = useMemo(() => activities.reduce((total, activity) => activity.category === 2 ? total + activity.calories : total, 0 ), [activities])
-    const calorieTotal = useMemo(() => caloriesConsumed - caloriesBurned, [activities])
+    const { state } = useActivity()
+
+    const caloriesConsumed = useMemo(() => state.activities.reduce((total, activity) => activity.category === 1 ? total + activity.calories : total, 0 ), [state.activities])
+    const caloriesBurned = useMemo(() => state.activities.reduce((total, activity) => activity.category === 2 ? total + activity.calories : total, 0 ), [state.activities])
+    const calorieTotal = useMemo(() => caloriesConsumed - caloriesBurned, [state.activities])
 
     return (
         <>

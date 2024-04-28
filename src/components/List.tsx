@@ -1,21 +1,19 @@
 import { Formulario } from "../types"
 import categories from "../data/categories"
-import { useMemo, Dispatch } from "react"
+import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon } from "@heroicons/react/24/outline"
-import { ActivityActions } from "../reducers/activityReducer"
+import { useActivity } from "../hooks/useActivity"
 
-type ListProps = {
-    state: Formulario[]
-    dispatch: Dispatch<ActivityActions>
-}
 
-const List = ({ state, dispatch }: ListProps) => {
+const List = () => {
+
+    const { state, dispatch } = useActivity()
 
     const categoryName = useMemo(() => (category: Formulario['category']) => categories.map(items => items.id === category ? items.name : ''), [state] )
 
     return(
         <>
-        {state.length < 1 ? 
+        {state.activities.length < 1 ? 
         <h2 className="text-4xl font-bold text-slate-600 text-center">
              Sin Actividades
         </h2>
@@ -24,7 +22,7 @@ const List = ({ state, dispatch }: ListProps) => {
                 Comida y Actividades
             </h2> }
             
-            { state.map(items => (
+            { state.activities.map(items => (
                 <div 
                 key={items.id}
                 className="px-5 py-10 bg-white mt-5 flex justify-between shadow-md">

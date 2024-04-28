@@ -1,15 +1,13 @@
 import categories from "../data/categories";
-import { Dispatch, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Formulario } from "../types";
-import { ActivityActions, ActivityState } from "../reducers/activityReducer";
 import { v4 as uuidv4 } from 'uuid';
+import { useActivity } from "../hooks/useActivity";
 
-type FormProps = {
-    dispatch: Dispatch<ActivityActions>,
-    state: ActivityState
-}
 
-const Form = ({ dispatch, state } : FormProps) => {
+const Form = () => {
+
+    const { state, dispatch } = useActivity()
 
     const [ formulario, setFormulario ] = useState<Formulario>({
         category: 0,
